@@ -1,6 +1,7 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import CommentViewSet,FavoriteViewSet,LikeFilmViewSet,CreateRatingAPIView
+
+from .views import CommentViewSet, FavoriteViewSet, LikeFilmViewSet, CreateRatingAPIView
 
 router = DefaultRouter()
 router.register('comments', CommentViewSet)

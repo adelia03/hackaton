@@ -1,15 +1,15 @@
 from rest_framework.serializers import ModelSerializer
 
-from .models import CommentFilm, RatingFilm, FavoriteFilm, LikeFilm , LikeComment
+from .models import Comment, Rating, Favourite, LikeFilm , LikeComment
 
 class CommentSerializer(ModelSerializer):
     class Meta:
-        model = CommentFilm
+        model = Comment
         fields = '__all__'
 
-    def to_representation(self, instance):
+    def to_representation(self, instance: Comment):
         rep = super().to_representation(instance)
-        rep['author'] = instance.author.username
+        rep['author'] = instance.author.email
         rep['likes'] = instance.likes.count()
         del rep['film']
         return rep
@@ -17,13 +17,13 @@ class CommentSerializer(ModelSerializer):
 
 class RatingSerializer(ModelSerializer):
     class Meta:
-        model = RatingFilm
+        model = Rating
         fields = '__all__'
 
     
 class FavoriteSerializer(ModelSerializer):
     class Meta:
-        model = FavoriteFilm
+        model = Favourite
         fields = '__all__'
 
 

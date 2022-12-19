@@ -7,24 +7,21 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from drf_yasg.utils import swagger_auto_schema
 
-from .models import CommentFilm, LikeFilm,FavoriteFilm, LikeComment, RatingFilm
+from .models import Comment, LikeFilm, Favourite, LikeComment, Rating
 from .serializers import CommentSerializer, RatingSerializer, FavoriteSerializer, LikeSerialzier
+from account.models import User
 
-
-# Create your views here.
-
-User= get_user_model()
 
 class CommentViewSet(ModelViewSet):
-    queryset = CommentFilm.objects.all()
+    queryset = Comment.objects.all()
     serializer_class = CommentSerializer
 
     @action(['POST'], detail=False)
     def like(self,request):
         author_id = request.data.get('author')
         comment_id = request.data.get('comment')
-        author = get_object_or_404(User, id = author_id)
-        comment = get_object_or_404(CommentFilm, id = comment_id)
+        author = get_object_or_404(User, id=author_id)
+        comment = get_object_or_404(Comment, id=comment_id)
 
         if LikeComment.objects.filter(author=author, comment=comment).exists():
             LikeComment.objects.filter(author=author, comment=comment).delete()
@@ -54,7 +51,7 @@ class LikeFilmViewSet(ModelViewSet):
 
 
 class FavoriteViewSet(ModelViewSet):
-    queryset = FavoriteFilm.objects.all()
+    queryset = Favourite.objects.all()
     serializer_class = FavoriteSerializer
 
     @action(['POST'],detail=False)
@@ -62,12 +59,12 @@ class FavoriteViewSet(ModelViewSet):
         author_id = request.data.get('author')
         film_id =request.data.get('film')
         author = get_object_or_404(User, id = author_id)
-        film = get_object_or_404(FavoriteFilm , id = film_id)
+        film = get_object_or_404(Favourite , id = film_id)
 
-        if FavoriteFilm.objects.filter(film=film, author=author).exists():
-            FavoriteFilm.objects.filter(film=film,author=author).delete()
+        if Favourite.objects.filter(film=film, author=author).exists():
+            Favourite.objects.filter(film=film,author=author).delete()
         else:
-            FavoriteFilm.objects.create(film=film,author=author)
+            Favourite.objects.create(film=film,author=author)
         return Response(status=201)
 
     
@@ -79,8 +76,8 @@ class CreateRatingAPIView(APIView):
         ser = RatingSerializer(data=request.data, context={'request':request})
         ser.is_valid(raise_exception=True)
         film_id = request.data.get('film')
-        if RatingFilm.objects.filter(author=user,film_id=film_id).exists():
-            rating = RatingFilm.objects.get(author=user, film_id=film_id)
+        if Rating.objects.filter(author=user,film_id=film_id).exists():
+            rating = Rating.objects.get(author=user, film_id=film_id)
             rating.value = request.data.get('value')
             rating.save()
         else:
