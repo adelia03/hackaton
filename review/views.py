@@ -81,7 +81,7 @@ class CreateRatingAPIView(APIView):
         film_id = request.data.get('film')
         if RatingFilm.objects.filter(author=user,film_id=film_id).exists():
             rating = RatingFilm.objects.get(author=user, film_id=film_id)
-            rating.value = request.data.egt('value')
+            rating.value = request.data.get('value')
             rating.save()
         else:
             ser.save()

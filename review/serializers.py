@@ -22,16 +22,18 @@ class RatingSerializer(ModelSerializer):
 
     
 class FavoriteSerializer(ModelSerializer):
-    model = FavoriteFilm
-    fields = '__all__'
+    class Meta:
+        model = FavoriteFilm
+        fields = '__all__'
 
 
 class LikeSerialzier(ModelSerializer):
-    model = LikeFilm
-    fields = '__all__'
+    class Meta:
+        model = LikeFilm
+        fields = '__all__'
 
 
 class LikeCommentSerializer(ModelSerializer):
-    model = LikeComment
-    fields = '__all__'
-    
+    class Meta:
+        model = LikeComment
+        fields = '__all__'
