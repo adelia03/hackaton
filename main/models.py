@@ -8,7 +8,7 @@ class Film(models.Model):
     producer = models.CharField(max_length=100)
     actors = models.TextField()
     duration = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='films')
+    image = models.ImageField(upload_to='films', null=True)
     video = models.TextField()
 
     def __str__(self) -> str:
