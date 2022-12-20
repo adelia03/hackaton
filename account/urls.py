@@ -4,11 +4,11 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 
-from .views import RegisterUserView, DeleteUserView
+from .views import RegisterUserView, delete
 
 urlpatterns = [
     path('register/', RegisterUserView.as_view()),
-    path('delete/', DeleteUserView.as_view()),
+    path('delete/<str:email>/', delete),
     path('token/', TokenObtainPairView.as_view()),
     path('token/refresh/', TokenRefreshView.as_view()),
 ]
