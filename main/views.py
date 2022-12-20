@@ -8,6 +8,7 @@ from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 from django.db.models import Q
 from rest_framework.response import Response
+from rest_framework.permissions import IsAdminUser, IsAuthenticated, IsAuthenticatedOrReadOnly
 
 
 
@@ -18,6 +19,13 @@ class FilmViewSet(ModelViewSet):
     serializer_class = FilmSerializer
     queryset = Film.objects.all()
     filterset_class = FilmFilter
+
+    def get_permissions(self):
+        if self.action in ['retrieve', 'list', 'search']:
+            # если это запрос на листинг или детализацию
+            return [] # разрешаем всем
+        
+        return [IsAdminUser()]
 
 
     @swagger_auto_schema(manual_parameters=[

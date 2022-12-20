@@ -11,7 +11,7 @@ class Comment(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f'{self.post} : {self.body}'
+        return f'{self.author} : {self.body}'
 
 
 class LikeComment(models.Model):
