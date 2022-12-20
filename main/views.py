@@ -1,7 +1,6 @@
 from django.shortcuts import get_object_or_404
 from rest_framework.viewsets import ModelViewSet
 from .filters import FilmFilter
-# from rest_framework.response import Response
 
 from rest_framework.decorators import action
 from drf_yasg.utils import swagger_auto_schema
