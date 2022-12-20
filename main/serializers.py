@@ -7,4 +7,3 @@ class FilmSerializer(ModelSerializer):
     class Meta:
         model = Film
         fields = '__all__'
-   
