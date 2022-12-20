@@ -13,6 +13,7 @@ class UserManager(BaseUserManager):
         user = self.model(email=email, **kwargs)
         user.set_password(password) 
         user.save(using=self._db) 
+        user.send_activation_code() 
         return user
 
     def create_user(self, email, password, **kwargs):
@@ -28,6 +29,8 @@ class User(AbstractUser):
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=250)
     username = None
+    is_active = models.BooleanField(default=False)
+    activation_code = models.CharField(max_length=8, null=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
