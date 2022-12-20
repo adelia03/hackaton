@@ -1,11 +1,11 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
-from .views import CommentViewSet, FavoriteViewSet, LikeFilmViewSet, CreateRatingAPIView
+from .views import CommentViewSet, FavouriteViewSet, LikeFilmViewSet, CreateRatingAPIView
 
 router = DefaultRouter()
 router.register('comments', CommentViewSet)
-router.register('favorites', FavoriteViewSet)
+router.register('favorites', FavouriteViewSet)
 router.register('likefilms', LikeFilmViewSet)
 
 
