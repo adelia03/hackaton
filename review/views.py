@@ -18,8 +18,8 @@ class CommentViewSet(ModelViewSet):
 
     @action(['POST'], detail=False)
     def like(self,request):
-        author_id = request.data.get('author')
-        comment_id = request.data.get('comment')
+        author_id = request.data.get("author")
+        comment_id = request.data.get("comment")
         author = get_object_or_404(User, id=author_id)
         comment = get_object_or_404(Comment, id=comment_id)
 
@@ -50,7 +50,7 @@ class LikeFilmViewSet(ModelViewSet):
 
 
 
-class FavoriteViewSet(ModelViewSet):
+class FavouriteViewSet(ModelViewSet):
     queryset = Favourite.objects.all()
     serializer_class = FavoriteSerializer
 

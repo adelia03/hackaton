@@ -33,7 +33,8 @@ swagger_view = get_schema_view(
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('docs/', swagger_view.with_ui("swagger",cache_timeout=0)),
+    path('docs/', swagger_view.with_ui("swagger", cache_timeout=0)),
+    path('account/', include('account.urls')),
     path('', include('review.urls')),
     path('', include('main.urls')),
 ]
