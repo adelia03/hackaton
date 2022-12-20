@@ -1,5 +1,4 @@
 from django.db import models
-
 from main.models import Film
 from account.models import User
 
