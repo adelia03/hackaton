@@ -1,4 +1,3 @@
-from django.shortcuts import get_object_or_404
 from rest_framework.viewsets import ModelViewSet
 from .filters import FilmFilter
 
@@ -8,8 +7,6 @@ from drf_yasg import openapi
 from django.db.models import Q
 from rest_framework.response import Response
 from rest_framework.permissions import IsAdminUser, IsAuthenticated, IsAuthenticatedOrReadOnly
-
-
 
 from .models import Film
 from .serializers import FilmSerializer
@@ -42,6 +39,7 @@ class FilmViewSet(ModelViewSet):
             return self.get_paginated_response(serializers.data)
         serializers = self.get_serializer(queryset, many=True)
         return Response(serializers.data, status=201)
+
 
 
 

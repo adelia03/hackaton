@@ -1,5 +1,4 @@
-from django.shortcuts import render
-from django.contrib.auth import get_user_model
+from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.decorators import action
@@ -7,14 +6,16 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from drf_yasg.utils import swagger_auto_schema
 
+
 from .models import Comment, LikeFilm, Favourite, LikeComment, Rating
 from .serializers import CommentSerializer, RatingSerializer, FavoriteSerializer, LikeSerialzier
 from account.models import User
-
+from .permissions import IsAuthorOrReadOnly
 
 class CommentViewSet(ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
+    permission_classes = [IsAuthorOrReadOnly]
 
     @action(['POST'], detail=False)
     def like(self,request):
@@ -30,10 +31,10 @@ class CommentViewSet(ModelViewSet):
         return Response(status=201)
 
 
-
 class LikeFilmViewSet(ModelViewSet):
     queryset = LikeFilm.objects.all()
     serializer_class = LikeSerialzier
+    permission_classes = [IsAuthenticated]
 
     @action(['Post'], detail=False)
     def like(self,request):
@@ -53,6 +54,7 @@ class LikeFilmViewSet(ModelViewSet):
 class FavouriteViewSet(ModelViewSet):
     queryset = Favourite.objects.all()
     serializer_class = FavoriteSerializer
+    permission_classes = [IsAuthenticated]
 
     @action(['POST'],detail=False)
     def favourite(request):
@@ -70,6 +72,7 @@ class FavouriteViewSet(ModelViewSet):
     
 
 class CreateRatingAPIView(APIView):
+    permission_classes = [IsAuthenticated]
     @swagger_auto_schema(request_body=RatingSerializer())
     def post(self, request):
         user = request.user
