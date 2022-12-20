@@ -24,7 +24,8 @@ class RatingSerializer(ModelSerializer):
 class FavoriteSerializer(ModelSerializer):
     class Meta:
         model = Favourite
-        fields = '__all__'
+        exclude =('author',)
+
 
 
 class LikeSerialzier(ModelSerializer):

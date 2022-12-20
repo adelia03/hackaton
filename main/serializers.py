@@ -1,5 +1,7 @@
 from rest_framework.serializers import ModelSerializer
+
 from .models import Film
+from review.serializers import *
 
 class FilmSerializer(ModelSerializer):
     class Meta:

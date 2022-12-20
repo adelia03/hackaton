@@ -11,7 +11,7 @@ class Comment(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f'{self.post} : {self.body}'
+        return f'{self.author} : {self.body}'
 
 
 class LikeComment(models.Model):
@@ -36,7 +36,7 @@ class Favourite(models.Model):
     film = models.ForeignKey(Film, related_name='favourites', on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.author} -> {self.film}'
+        return f'{self.film}'
 
 
 class LikeFilm(models.Model):
