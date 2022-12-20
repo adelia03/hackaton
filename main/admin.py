@@ -11,7 +11,7 @@ class CommentInLine(admin.TabularInline):
 
 class FilmAdmin(admin.ModelAdmin):
     list_display= ['title', 'genre',]
-    list_filter = ['genre',]
+    list_filter = ['genre','favourites',]
     search_fields = ['title',]
     inlines = [CommentInLine]
 
