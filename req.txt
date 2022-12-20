@@ -6,4 +6,3 @@ drf-yasg
 psycopg2-binary
 django-filter
 pillow
-django-cors-headers==3.13.0
