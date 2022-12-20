@@ -1,15 +1,14 @@
-from rest_framework.viewsets import ModelViewSet
-from .filters import FilmFilter
-
 from rest_framework.decorators import action
 from drf_yasg.utils import swagger_auto_schema
+from rest_framework.viewsets import ModelViewSet
+from rest_framework.response import Response
+from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from drf_yasg import openapi
 from django.db.models import Q
-from rest_framework.response import Response
-from rest_framework.permissions import IsAdminUser, IsAuthenticated, IsAuthenticatedOrReadOnly
 
 from .models import Film
 from .serializers import FilmSerializer
+from .filters import FilmFilter
 
 class FilmViewSet(ModelViewSet):
     serializer_class = FilmSerializer

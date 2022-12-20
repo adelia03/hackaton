@@ -6,7 +6,6 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from drf_yasg.utils import swagger_auto_schema
 
-
 from .models import Comment, LikeFilm, Favourite, LikeComment, Rating
 from .serializers import CommentSerializer, RatingSerializer, FavoriteSerializer, LikeSerialzier
 from account.models import User
@@ -36,7 +35,7 @@ class LikeFilmViewSet(ModelViewSet):
     serializer_class = LikeSerialzier
     permission_classes = [IsAuthenticated]
 
-    @action(['Post'], detail=False)
+    @action(['POST'], detail=False)
     def like(self,request):
         author_id = request.data.get('author')
         comment_id = request.data.get('comment')

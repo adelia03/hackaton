@@ -5,7 +5,7 @@ from .views import CommentViewSet, FavouriteViewSet, LikeFilmViewSet, CreateRati
 
 router = DefaultRouter()
 router.register('comments', CommentViewSet)
-router.register('favorites', FavouriteViewSet)
+router.register('favourites', FavouriteViewSet)
 router.register('likefilms', LikeFilmViewSet)
 
 
