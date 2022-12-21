@@ -26,6 +26,11 @@ class FavoriteSerializer(ModelSerializer):
         model = Favourite
         exclude =('author',)
 
+    def to_representation(self, instance):
+        rep = super().to_representation(instance)
+        rep['film'] = instance.film.title
+        return rep
+
 
 
 class LikeSerialzier(ModelSerializer):
