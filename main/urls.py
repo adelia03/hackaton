@@ -6,6 +6,7 @@ from .views import FilmViewSet
 router = DefaultRouter()
 router.register('films', FilmViewSet)
 
+
 urlpatterns = [
     path('', include(router.urls)),
 ]

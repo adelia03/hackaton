@@ -1,15 +1,16 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
-from .views import CommentViewSet, FavouriteViewSet, LikeFilmViewSet, CreateRatingAPIView
+from .views import CommentViewSet, CreateFavouriteAPIView, CreateRatingAPIView, CreateLikeFilmAPIView
 
 router = DefaultRouter()
 router.register('comments', CommentViewSet)
-router.register('favourites', FavouriteViewSet)
-router.register('likefilms', LikeFilmViewSet)
+
 
 
 urlpatterns = [
     path('',include(router.urls)),
     path('rating/', CreateRatingAPIView.as_view()),
+    path('likefilms/', CreateLikeFilmAPIView.as_view()),
+    path('favourite/', CreateFavouriteAPIView.as_view()),
 ]
