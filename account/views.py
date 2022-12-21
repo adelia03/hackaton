@@ -5,7 +5,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
-from .serializers import RegisterUserSerializer
+from .serializers import RegisterUserSerializer, UserSerializer
 from .models import User
 
 
@@ -36,3 +36,9 @@ def activate_view(request, activation_code):
     return Response('Successfuly activated the account', 200)
 
 
+@api_view(['GET'])
+def user_detail(request, id):
+    user = get_object_or_404(User, id=id)
+    
+
+    return Response(UserSerializer(user).data, status=200)

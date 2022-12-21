@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from review.serializers import FavoriteSerializer
 
 from .models import User
 
@@ -24,3 +25,16 @@ class RegisterUserSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         return User.objects.create_user(**validated_data)
+
+
+class UserSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = ('email',)
+
+    def to_representation(self, instance):
+        rep = super().to_representation(instance)
+        rep['favourite'] = FavoriteSerializer(instance.favourites.all(), many=True).data
+
+        return rep
