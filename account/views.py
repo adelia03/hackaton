@@ -35,4 +35,3 @@ def activate_view(request, activation_code):
     user.save()
     return Response('Successfuly activated the account', 200)
 
-
