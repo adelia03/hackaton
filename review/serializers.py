@@ -18,13 +18,25 @@ class CommentSerializer(ModelSerializer):
 class RatingSerializer(ModelSerializer):
     class Meta:
         model = Rating
-        fields = '__all__'
+        exclude = ('author',)
+    
+
+    def validate(self, attrs):
+        attrs = super().validate(attrs)
+        request = self.context.get('request')  # получаем запрос из view
+        attrs['author'] = request.user
+        return attrs
 
     
 class FavoriteSerializer(ModelSerializer):
     class Meta:
         model = Favourite
         exclude =('author',)
+
+    def to_representation(self, instance):
+        rep = super().to_representation(instance)
+        rep['film'] = instance.film.title
+        return rep
 
 
 
@@ -37,4 +49,4 @@ class LikeSerialzier(ModelSerializer):
 class LikeCommentSerializer(ModelSerializer):
     class Meta:
         model = LikeComment
-        fields = '__all__'
+        exclude = ('comment',)

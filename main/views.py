@@ -10,6 +10,7 @@ from .models import Film
 from .serializers import FilmSerializer
 from .filters import FilmFilter
 
+
 class FilmViewSet(ModelViewSet):
     serializer_class = FilmSerializer
     queryset = Film.objects.all()
@@ -31,14 +32,10 @@ class FilmViewSet(ModelViewSet):
         q = requests.query_params.get('q')
         queryset = self.get_queryset()
         if q:
-            queryset = queryset.filter(Q(title_icontains=q) | Q(body_icontains=q))
+            queryset = queryset.filter(Q(title__icontains=q) | Q(body__icontains=q))
         pagination = self.paginate_queryset(queryset)
         if pagination:
             serializers = self.get_serializer(pagination, many=True)
             return self.get_paginated_response(serializers.data)
         serializers = self.get_serializer(queryset, many=True)
         return Response(serializers.data, status=201)
-
-
-
-
