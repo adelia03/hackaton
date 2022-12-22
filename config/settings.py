@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'drf_yasg',
     'rest_framework_simplejwt',
     'corsheaders',
-    'django_celery_results',
     'django.contrib.sites',
     'allauth',
     'allauth.account',
