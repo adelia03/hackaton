@@ -35,7 +35,6 @@ def activate_view(request, activation_code):
     user.save()
     return Response('Successfuly activated the account', 200)
 
-
 @api_view(['GET'])
 def user_detail(request, id):
     user = get_object_or_404(User, id=id)

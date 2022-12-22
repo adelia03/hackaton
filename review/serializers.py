@@ -18,7 +18,14 @@ class CommentSerializer(ModelSerializer):
 class RatingSerializer(ModelSerializer):
     class Meta:
         model = Rating
-        fields = '__all__'
+        exclude = ('author',)
+    
+
+    def validate(self, attrs):
+        attrs = super().validate(attrs)
+        request = self.context.get('request')  # получаем запрос из view
+        attrs['author'] = request.user
+        return attrs
 
     
 class FavoriteSerializer(ModelSerializer):
@@ -42,4 +49,4 @@ class LikeSerialzier(ModelSerializer):
 class LikeCommentSerializer(ModelSerializer):
     class Meta:
         model = LikeComment
-        fields = '__all__'
+        exclude = ('comment',)
