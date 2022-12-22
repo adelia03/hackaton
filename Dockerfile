@@ -24,6 +24,7 @@ ENV DB_PORT=6297
 ENV DB_NAME=railway
 ENV SMTP_EMAIL=aupmaan@gmail.com
 ENV SMTP_PASSWORD=osutizmswudoiupr
+ENV PORT=8000
 
 RUN python3 manage.py migrate
 RUN python3 manage.py collectstatic
