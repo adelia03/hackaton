@@ -6,6 +6,8 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from main.models import Film
+
 from .models import Comment, LikeFilm, Favourite, LikeComment, Rating
 from .serializers import CommentSerializer, RatingSerializer, FavoriteSerializer, LikeSerialzier
 from account_one.models import User
