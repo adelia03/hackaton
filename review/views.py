@@ -8,7 +8,7 @@ from drf_yasg.utils import swagger_auto_schema
 
 from .models import Comment, LikeFilm, Favourite, LikeComment, Rating
 from .serializers import CommentSerializer, RatingSerializer, FavoriteSerializer, LikeSerialzier
-from account.models import User
+from account_one.models import User
 from .permissions import IsAuthorOrReadOnly
 
 class CommentViewSet(ModelViewSet):
