@@ -1,11 +1,17 @@
 from rest_framework.serializers import ModelSerializer
 
-from .models import Comment, Rating, Favourite, LikeFilm , LikeComment
+from .models import Comment, Rating, Favourite, LikeFilm, LikeComment
 
 class CommentSerializer(ModelSerializer):
     class Meta:
         model = Comment
-        fields = '__all__'
+        exclude = ('author',)
+
+    def validate(self, attrs):
+        attrs =  super().validate(attrs)
+        request = self.context.get('request')
+        attrs['author'] = request.user
+        return attrs
 
     def to_representation(self, instance: Comment):
         rep = super().to_representation(instance)
@@ -20,10 +26,9 @@ class RatingSerializer(ModelSerializer):
         model = Rating
         exclude = ('author',)
     
-
     def validate(self, attrs):
         attrs = super().validate(attrs)
-        request = self.context.get('request')  # получаем запрос из view
+        request = self.context.get('request')  
         attrs['author'] = request.user
         return attrs
 
@@ -33,20 +38,20 @@ class FavoriteSerializer(ModelSerializer):
         model = Favourite
         exclude =('author',)
 
-    def to_representation(self, instance):
-        rep = super().to_representation(instance)
-        rep['film'] = instance.film.title
-        return rep
-
-
+    def validate(self, attrs):
+        attrs =  super().validate(attrs)
+        request = self.context.get('request')
+        attrs['author'] = request.user
+        return attrs
+        
 
 class LikeSerialzier(ModelSerializer):
     class Meta:
         model = LikeFilm
-        fields = '__all__'
+        exclude = ('author',)
 
 
 class LikeCommentSerializer(ModelSerializer):
     class Meta:
         model = LikeComment
-        exclude = ('comment',)
+        exclude = ('author',)
