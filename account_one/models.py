@@ -16,7 +16,11 @@ class UserManager(BaseUserManager):
         user.send_activation_code() 
         return user
 
+    def create_nonactive_user(self, email, password, **kwargs):
+        return self._create(email, password, **kwargs)
+
     def create_user(self, email, password, **kwargs):
+        kwargs.setdefault('is_active', True)
         return self._create(email, password, **kwargs)
 
     def create_superuser(self, email, password, **kwargs):
