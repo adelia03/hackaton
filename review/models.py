@@ -1,6 +1,6 @@
 from django.db import models
 from main.models import Film
-from account.models import User
+from account_one.models import User
 
 class Comment(models.Model):
     film = models.ForeignKey(Film, related_name='comments', on_delete=models.CASCADE)
