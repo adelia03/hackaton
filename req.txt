@@ -6,3 +6,5 @@ drf-yasg
 psycopg2-binary
 django-filter
 pillow
+django-allauth
+django-crispy-forms

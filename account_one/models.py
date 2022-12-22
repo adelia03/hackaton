@@ -16,7 +16,11 @@ class UserManager(BaseUserManager):
         user.send_activation_code() 
         return user
 
+    def create_nonactive_user(self, email, password, **kwargs):
+        return self._create(email, password, **kwargs)
+
     def create_user(self, email, password, **kwargs):
+        kwargs.setdefault('is_active', True)
         return self._create(email, password, **kwargs)
 
     def create_superuser(self, email, password, **kwargs):
@@ -28,7 +32,7 @@ class UserManager(BaseUserManager):
 class User(AbstractUser):
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=250)
-    username = None
+    # username = None
     is_active = models.BooleanField(default=False)
     activation_code = models.CharField(max_length=8, null=True)
 
