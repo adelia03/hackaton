@@ -26,7 +26,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -95,11 +95,11 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_NAME'),
-        'USER':config('DB_USER'),
-        'PASSWORD':config('DB_PASSWORD'),
-        'HOST': config('DB_HOST'),
-        'PORT': config('DB_PORT'),
+        'NAME': config('DB_NAME'), #railway
+        'USER':config('DB_USER'),  #postgres
+        'PASSWORD':config('DB_PASSWORD'),   #MYe6H79oiYETvbANvkyv
+        'HOST': config('DB_HOST'),   #containers-us-west-66.railway.app
+        'PORT': config('DB_PORT'),   #5936
     }
 }
 

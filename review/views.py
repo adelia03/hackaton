@@ -4,9 +4,8 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-
 from .models import Comment, LikeFilm, Favourite, LikeComment, Rating
-from .serializers import CommentSerializer, RatingSerializer, FavoriteSerializer, LikeSerialzier, LikeCommentSerializer
+from .serializers import CommentSerializer, LikeCommentSerializer, RatingSerializer, FavoriteSerializer, LikeSerialzier
 from .permissions import IsAuthorOrReadOnly
 
 
