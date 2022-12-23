@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
 
     # apps
+    'chat',
     'main',
     'account_one',
     'review',
@@ -236,3 +237,4 @@ CORS_ALLOWED_ORIGINS = [
 CSRF_TRUSTED_ORIGINS = [
     'https://deploy-production-59e4.up.railway.app'
 ]
+APPEND_SLASH=False
