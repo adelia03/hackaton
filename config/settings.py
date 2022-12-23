@@ -26,7 +26,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['localhost','127.0.0.1']
 
 
 # Application definition
@@ -100,6 +100,7 @@ DATABASES = {
         'PASSWORD':config('DB_PASSWORD'),   #MYe6H79oiYETvbANvkyv
         'HOST': config('DB_HOST'),   #containers-us-west-66.railway.app
         'PORT': config('DB_PORT'),   #5936
+        
     }
 }
 
