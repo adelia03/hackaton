@@ -24,7 +24,7 @@ class RegisterUserSerializer(serializers.ModelSerializer):
         return email
 
     def create(self, validated_data):
-        return User.objects.create_nonactive_user(**validated_data)
+        return User.objects.create_user(**validated_data)
 
 
 class UserSerializer(serializers.ModelSerializer):
