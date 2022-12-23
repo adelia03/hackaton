@@ -232,15 +232,6 @@ CORS_ALLOWED_ORIGINS = [
     'https://minecode.up.railway.app',
 ]
 
-CORS_ORIGIN_WHITELIST = [
-    'https://deploy-production-59e4.up.railway.app',
-    'http://localhost:3000',
-    'http://localhost:3001', 
-    'http://127.0.0.1:3000',
-    'http://127.0.0.1:3001', 
-    'https://www.thunderclient.com',
-    'https://minecode.up.railway.app',
-]
 
 CSRF_TRUSTED_ORIGINS = [
     'https://deploy-production-59e4.up.railway.app'
