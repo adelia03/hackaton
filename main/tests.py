@@ -1,3 +1,8 @@
 from django.test import TestCase
 
-# Create your tests here.
+# from .models import Film
+
+# class FilmModelTest(TestCase):
+
+#     def setUp(self):
+#         Film.objects.create(title='avatar', )
