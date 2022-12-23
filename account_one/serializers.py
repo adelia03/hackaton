@@ -1,6 +1,6 @@
 from rest_framework import serializers
-from review.serializers import FavoriteSerializer
 
+from review.serializers import FavoriteSerializer
 from .models import User
 
 
@@ -38,3 +38,4 @@ class UserSerializer(serializers.ModelSerializer):
         rep['favourite'] = FavoriteSerializer(instance.favourites.all(), many=True).data
 
         return rep
+
