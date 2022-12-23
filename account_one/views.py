@@ -4,9 +4,11 @@ from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+from django.core.mail import send_mail
 
-from .serializers import RegisterUserSerializer, UserSerializer
+from .serializers import RegisterUserSerializer, UserSerializer, CreateNewPasswordSerializer
 from .models import User
+
 
 
 class RegisterUserView(APIView):
@@ -40,3 +42,34 @@ def user_detail(request, id):
     user = get_object_or_404(User, id=id)
     return Response(UserSerializer(user).data, status=200)
 
+    return Response(UserSerializer(user).data, status=200)
+
+
+def send_activation_code(email, activation_code):
+    activation_url = f'localhost:8000/account/forgot-password-complete/{activation_code}'
+    message = f"""Чтобы восстановить пароль, пройдите по данной ссылке: {activation_url}"""
+    send_mail('Восстановление пароля', message, 'admin@admin.com',recipient_list=[email],)
+
+class ForgotPassword(APIView):
+
+    def get(self, request):
+        email = request.query_params.get('email')
+        user = get_object_or_404(User, email=email)
+        user.is_active = False
+        user.create_activation_code()
+        user.save()
+        send_activation_code(user.email, user.activation_code)
+        return Response('Вам отправлено письмо', status=200)
+
+
+class ForgotPasswordComplete(APIView):
+
+    def post(self, request, activation_code):
+        user = get_object_or_404(User, activation_code=activation_code)
+        user.activation_code = ''
+        serializer = CreateNewPasswordSerializer(data=request.data)
+        user.is_active = True
+        user.save()
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response('Вы успешно восстановили пароль', status=200)
